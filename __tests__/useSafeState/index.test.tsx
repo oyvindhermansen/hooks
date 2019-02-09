@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  render,
-  fireEvent,
-  cleanup,
-  flushEffects
-} from 'react-testing-library';
+import { render, fireEvent, cleanup, act } from 'react-testing-library';
 import useSafeState from '../../src/useSafeState';
 
 function EffectfulComponent() {
@@ -25,14 +20,17 @@ describe('useSafeState', () => {
     const button = container.firstChild;
 
     // Force React's useEffect hook to run synchronously.
-    flushEffects();
-    // Should be default 0
-    expect(button.textContent).toBe('0');
+    act(() => {
+      // Should be default 0
+      expect(button.textContent).toBe('0');
+    });
 
     // Fire the set state event
     // @ts-ignore
     fireEvent.click(button);
 
-    expect(button.textContent).toBe('1');
+    act(() => {
+      expect(button.textContent).toBe('1');
+    });
   });
 });
