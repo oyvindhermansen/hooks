@@ -1,6 +1,6 @@
 {
   "name": "@oyvindher/hooks",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Hooks collection",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
