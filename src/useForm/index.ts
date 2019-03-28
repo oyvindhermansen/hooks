@@ -4,11 +4,13 @@ type Method = 'POST' | 'PATCH' | 'UPDATE';
 
 type Data = { [key: string]: string };
 
-interface UseFormOptions {
+interface UseFormOptions<T> {
   endpoint: string;
   method?: Method;
   defaultFields?: { [key: string]: string };
   headers?: Data;
+  onSuccess?: (res: T) => void;
+  onError?: (err: any) => void;
 }
 
 interface UseFormInterface<T> {
@@ -20,7 +22,9 @@ interface UseFormInterface<T> {
   response: T;
 }
 
-export default function useForm<T>(opts: UseFormOptions): UseFormInterface<T> {
+export default function useForm<T>(
+  opts: UseFormOptions<T>
+): UseFormInterface<T> {
   /**
    * TODO:
    * Put this into a state reducer instead
@@ -45,18 +49,27 @@ export default function useForm<T>(opts: UseFormOptions): UseFormInterface<T> {
         preparedData[key] = value;
       }
 
-      const res = await fetch(opts.endpoint, {
+      const res: unknown = await fetch(opts.endpoint, {
         method: opts.method || 'POST',
         headers: { ...opts.headers, 'Content-Type': 'application/json' },
         body: JSON.stringify(preparedData)
       });
 
-      setResponse(res);
+      const finalResponse = res as T;
+
+      setResponse(finalResponse);
       setSubmitting(false);
-      setError(null);
+
+      if (typeof opts.onSuccess === 'function') {
+        opts.onSuccess(finalResponse);
+      }
     } catch (error) {
       setSubmitting(false);
       setError(error);
+
+      if (typeof opts.onError === 'function') {
+        opts.onError(error);
+      }
     }
   }
 
