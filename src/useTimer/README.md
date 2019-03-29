@@ -5,10 +5,15 @@ Hook for setting a timeout with custom delay.
 Usage:
 
 ```jsx
-const [timer, setTimer] = useTimer();
+import { useTimer } from '@oyvindher/hooks';
 
-setTimer(2000);
+function App() {
+  const [timer, setTimer] = useTimer();
 
-// timer variable is now true until timer has expired
-console.log(timer);
+  setTimer(2000);
+
+  // timer variable is now true until timer has expired
+
+  return <div>{JSON.stringify(timer)}</div>;
+}
 ```
