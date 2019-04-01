@@ -7,7 +7,7 @@ type Data = { [key: string]: string };
 interface UseFormOptions<T> {
   endpoint: string;
   method?: Method;
-  defaultFields?: { [key: string]: string };
+  fields?: { [key: string]: string };
   headers?: Data;
   onSuccess?: (res: T) => void;
   onError?: (err: any) => void;
@@ -25,7 +25,7 @@ interface UseFormInterface<T> {
 export default function useForm<T>(
   opts: UseFormOptions<T>
 ): UseFormInterface<T> {
-  const [formFields, setFormFields] = useState(opts.defaultFields || {});
+  const [formFields, setFormFields] = useState(opts.fields || {});
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [response, setResponse] = useState(null);

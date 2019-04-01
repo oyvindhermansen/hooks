@@ -14,7 +14,7 @@ function MyForm() {
     headers: {},
     onSuccess: response => {},
     onError: error => {},
-    defaultFields: {
+    fields: {
       username: '',
       password: ''
     }
