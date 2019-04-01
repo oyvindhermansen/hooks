@@ -13,7 +13,10 @@ function MyForm() {
     headers: {},
     onSuccess: response => {},
     onError: error => {},
-    defaultFields: {},
+    defaultFields: {
+      username: '',
+      password: ''
+    },
     method: 'POST'
   });
 

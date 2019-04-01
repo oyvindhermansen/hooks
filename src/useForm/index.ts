@@ -25,12 +25,6 @@ interface UseFormInterface<T> {
 export default function useForm<T>(
   opts: UseFormOptions<T>
 ): UseFormInterface<T> {
-  /**
-   * TODO:
-   * Put this into a state reducer instead
-   * for more syncronous control.
-   */
-
   const [formFields, setFormFields] = useState(opts.defaultFields || {});
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
