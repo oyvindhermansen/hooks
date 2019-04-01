@@ -10,14 +10,14 @@ import { useForm } from '@oyvindher/hooks';
 function MyForm() {
   const { submit, setField, getField, submitting } = useForm({
     endpoint: '/api/login',
+    method: 'POST',
     headers: {},
     onSuccess: response => {},
     onError: error => {},
     defaultFields: {
       username: '',
       password: ''
-    },
-    method: 'POST'
+    }
   });
 
   return (
