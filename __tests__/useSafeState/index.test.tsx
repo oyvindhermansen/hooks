@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render, fireEvent, cleanup, act } from 'react-testing-library';
-import useSafeState from '../../src/useSafeState';
+import { useSafeState } from '../../src/useSafeState';
 
 function EffectfulComponent() {
   const [state, setState] = useSafeState(0);

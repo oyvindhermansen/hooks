@@ -4,7 +4,7 @@ type Method = 'POST' | 'PATCH' | 'UPDATE';
 
 type Data = { [key: string]: string };
 
-interface UseFormOptions<T> {
+export interface UseFormOptions<T> {
   endpoint: string;
   method?: Method;
   fields?: { [key: string]: string };
@@ -13,7 +13,7 @@ interface UseFormOptions<T> {
   onError?: (err: any) => void;
 }
 
-interface UseFormInterface<T> {
+export interface UseFormInterface<T> {
   submit: (e: FormEvent<HTMLFormElement>) => Promise<any>;
   getField: (name: string) => string;
   setField: (key: string, value: string) => void;
@@ -22,9 +22,7 @@ interface UseFormInterface<T> {
   response: T;
 }
 
-export default function useForm<T>(
-  opts: UseFormOptions<T>
-): UseFormInterface<T> {
+export function useForm<T>(opts: UseFormOptions<T>): UseFormInterface<T> {
   const [formFields, setFormFields] = useState(opts.fields || {});
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
@@ -85,5 +83,3 @@ export default function useForm<T>(
     setField
   };
 }
-
-export { UseFormOptions, UseFormInterface };

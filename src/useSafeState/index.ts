@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, SetStateAction } from 'react';
 
-export default function useSafeState<T>(
+export function useSafeState<T>(
   defaultState: T
 ): [T, (s: SetStateAction<T>) => void] {
   const [state, setState] = useState<T>(defaultState);
